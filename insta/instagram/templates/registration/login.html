@@ -1,49 +1,57 @@
-{% extends 'inherited-tem/base.html' %}
-{% load bootstrap3 %}
+ {% extends 'inherited-temp/base.html' %} {% load bootstrap3 %} {% load staticfiles %}{% block content %}
+<div class="reg-cont">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-7 col-sm-6 col-xs-6 col-lg-8">
+                <img src="{%static 'img/logo.png' %}" alt="Instagram Logo" class="img-responsive" style='height: 14vh;margin-left: 30%; margin-bottom:5%'>
+                <img src="{% static 'img/bg.png' %}" alt="" style="margin-top:-12%">
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-6 col-lg-4 reg-container">
 
-{% block content %}
+                {% if form.errors %}
 
-    {% if form.errors %}
+                <!-- Add meaningful error message -->
 
-        <!-- Add meaningful error message -->
+                {% endif %}
 
-    {% endif %}
+                <div class="panel panel-default">
 
-    <div class="panel panel-default">
-        
-        <div class="panel-heading">
+                    <div class="panel-heading">
 
-            <h3 class="text-center">
-                Sign In
-            </h3>
+                        <h3 class="text-center">
+                            Sign In
+                        </h3>
 
-        </div>
+                    </div>
 
-        <div class="panel-body">
-            
-            <form action="/accounts/login/" method="post">
+                    <div class="panel-body">
 
-                {% csrf_token %}
+                        <form action="/accounts/login/" method="post">
 
-                {% bootstrap_form form %}
+                            {% csrf_token %} {% bootstrap_form form %}
 
-                <div class="form-group">
-                    
-                    <input type="submit" class="btn btn-primary btn-sm" value="Login">
-                    
+                            <div class="form-group">
+
+                                <input type="submit" class="btn btn-primary btn-sm" value="Login">
+
+
+                            </div>
+
+                            <input type="hidden" name="next" value="{%url 'timeline'%}">
+
+                        </form>
+
+                        <h4>
+                            Don't have an account?
+                            <a href="/accounts/register/">Sign Up</a>
+                        </h4>
+
+                    </div>
 
                 </div>
 
-                <input type="hidden" name="next" value="{%url 'timeline'%}">
-
-            </form>
-
-            <h4>
-                Don't have an account? <a href="/accounts/register/">Sign Up</a>
-            </h4>
-
+            </div>
         </div>
-        
     </div>
-
+</div>
 {% endblock %}
