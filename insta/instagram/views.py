@@ -31,3 +31,21 @@ def index(request):
                 following_posts.append(post)
 
     return render(request, 'index.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts})
+
+@login_required(login_url='/accounts/register')
+def profile(request,id):
+
+    current_user = request.user
+
+    try:
+
+        single_profile = Profile.objects.get(user=current_user.id)
+
+        title = f'{current_user.username}\'s'
+
+        posts = Post.objects.filter(user=current_user.id)
+
+        return render(request, 'all-temps/profile.html', {"title":title,"current_user":current_user,"posts":posts})
+
+    except DoesNotExists:
+        raise Http404()
