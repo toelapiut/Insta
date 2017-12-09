@@ -8,6 +8,7 @@ urlpatterns = [
     url( r'^$', views.index, name="timeline"),
     url( r'^post', views.post, name="post"),
     url( r'^profile/(\d+)', views.profile, name="profile"),
+    url( r'^following/(\d+)', views.follow, name="follow"),
     url( r'^look_up/(\d+)', views.look_up, name="look-up"),
 ]
 
