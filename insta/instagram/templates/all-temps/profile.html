@@ -1,65 +1,54 @@
-{% extends 'inherited-temp/base.html' %} {% load staticfiles%}
-
+{% extends 'inherited-temp/base.html' %}{% load staticfiles%} {% load bootstrap3 %}
 <!-- Styles block -->
 {% block styles %} {{block.super}}
-<link rel="stylesheet" href="{% static 'css/my-profile.css'%}"> {% endblock %}
+<link rel="stylesheet" href="{% static 'css/index.css'%}"> {% endblock %}
 
 <!-- Content block -->
 {% block content %} {{block.super}}
 
 <div class="container">
 
-    <div class="row profileHeaderRow">
+    <div class="row">
 
 
-        <div class="col-md-1 col-lg-1">
+        <div class="col-md-4 col-lg-4 ">
 
+                       <img src="{% static 'img/def.jpg' %}" alt="" class='img-responsive profile' srcset="">
         </div>
 
+        <div class="col-md-4 col-lg-4 user">
 
-
-        <div class="col-md-3 col-lg-3">
-
-            <img src="{{current_user.profile.profile_pic.url}}" alt="{{current_user.username}}" class="img-responsive profilePicture">
-
-        </div>
-
-
-
-        <div class="col-md-7 col-lg-7">
-
-            <h1 class="username">
+            <h3 class="username">
                 {{current_user.username}}
-            </h1>
-
-            <h1 class="createPost">
-
-                <a href="{% url 'new-post'%}">
-                    Create Post
-                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                </a>
-
-            </h1>
-
+            </h3>
         </div>
-
-
-        <div class="col-md-1 col-lg-1">
-
+        <div class="col-md-2 col-lg-2">
+            <div class="edit-btn">
+                <a href="{% url 'new-post'%}" id="button_submit" style="float:left;margin-bottom: 23px;margin-top:-16%;margin-left:-141%">Add Image</a>
+            </div>
         </div>
+        <div class="col-md-2 col-lg-2">
+                <div class="st-btn">
+                    <a href="#"><img src="{% static 'img/setting.png'%}" alt=""  style="float:left;margin-bottom: 23px;margin-top:-17%;margin-left:-190%;height:3.9vh"></a>
+                </div>
+            </div>
 
     </div>
 
-    <hr> {% for post in posts %}
+    <hr>
 
-    <div class="col-md-4 col-lg-4">
+    <div class="row">
+        {% for post in posts %}
 
-        <img src="{{post.image.url}}" alt="{{post.caption}}" class="img-responsive postImage">
 
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+
+            <img src="{{post.image.url}}" alt="{{post.caption}}" class="img-responsive prof">
+
+        </div>
+
+        {% endfor %}
     </div>
-
-    {% endfor %}
-
 </div>
 
 {% endblock %}
