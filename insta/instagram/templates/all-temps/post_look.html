@@ -1,132 +1,86 @@
-{% extends 'all-temps/base.html' %}
-{% load staticfiles%}
-{% load bootstrap3%}
+{% extends 'inherited-temp/base.html' %} {% load staticfiles%} {% load bootstrap3%}
 
 <!-- Styles block -->
-{% block styles %}
-
-    {{block.super}}
-    <link rel="stylesheet" href="{% static 'css/post.css'%}">
-
-{% endblock %}
+{% block styles %} {{block.super}}
+<link rel="stylesheet" href="{% static 'css/index.css'%}"> {% endblock %}
 
 <!-- Content block -->
-{% block content %}
+{% block content %} {{block.super}}
 
-    {{block.super}}
+<div class="container">
 
-    <div class="container">
+    <div class="row postRow">
+        <!-- Post Div -->
 
-        <div class="row postRow">
-           <!-- Post Div -->
+        <div class="col-md-10 col-lg-10">
 
-            <div class="col-md-10 col-lg-10">
+            <div class="panel panel-default">
 
-                <div class="panel panel-default">
+                <div class="panel-heading">
 
-                    <div class="panel-heading">
+                    <img src="{{post.profile.url}}" alt="{{post.profile.user.username}}" class="img-responsive profilePicture">
 
-                        <img src="{{post.profile.profile_pic.url}}" alt="{{post.profile.user.username}}" class="img-responsive profilePicture">
+                    <h6 class="username">
+                        {{post.profile.user.username}}
+                    </h6>
 
-                        <h6 class="username">
-                            {{post.profile.user.username}}
-                        </h6>
+                    <h3 class="comment" style='float:right'>
 
-                        <h6 class="timeSince">
-                            {{post.post_date | timesince}} ago
-                        </h6>
+                        <a href="{%url 'comment' post.id%}">
+                            <img src="{%static 'img/comment.png'%}" alt="" style="height:4vh">
+                        </a>
 
-                    </div>
+                    </h3>
 
-                    <div class="panel-body">
-        
-                        <img src="{{post.image.url}}" alt="{{post.caption}}" class="img-responsive postImage">
+                </div>
 
-                        <h5 class="text-center">
-                            {{post.caption}}
-                        </h5>
-                        
-                        {{likes}}
+                <div class="panel-body" style="padding:0px">
 
+                    <img src="{{post.image.url}}" alt="{{post.caption}}" class="img-responsive postImage">
 
-                        {% if like %}
+                    <h5 class="text-center">
+                        {{post.caption}}
+                    </h5>
 
-                            <i class="fa fa-heart" aria-hidden="true"></i>
+                    {% for comment in comments %}
 
-                        {% else %}
+                    <h5>
 
-                            <a href="{%url 'like' post.id%}">
-                                    
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                        <img src="{% static 'img/def.jpg'%}" alt="{{comment.user.username}}" class="img-responsive" style="height:7vh;border-radius:100%;width:5.6%">
 
-                            </a>
+                        <span class="commentContent" style='margin-top:50px'>
 
-                        {% endif %}
+                            {{comment.comment_content}}
 
-                        {% for comment in comments %}
+                        </span>
 
-                           <h5>
+                    </h5>
 
-                                <img src="{{comment.user.profile.profile_pic.url}}" alt="{{comment.user.username}}" class="img-responsive commentProfilePicture">
+                    {% empty %}
 
-                                <span class="commenterName">
+                    <h6>
+                        No Comments
+                    </h6>
 
-                                    {{comment.user.username}}
-                                    
-                                </span>
+                    {% endfor %} {{likes}} {% if like %}
+                    <img src="{% static 'img/like.png'%}" alt="like" class='img-responsive' style="height:5vh;padding:5px 5px 5px;margin-top:-34px;"> {% else %}
 
-                                <span class="commentContent">
+                    <a href="{%url 'liker' post.id%}">
 
-                                    {{comment.comment_content}}
+                        <img src="{% static 'img/unlike.png'%}" alt="like" class='img-responsive' style="height:5vh">
 
-                                </span>
+                    </a>
 
-                            </h5>
-
-                        {% empty %}
-
-                            <h6>
-                                No Comments
-                            </h6>
-
-                        {% endfor %}
-
-                        <div class="row">
-
-                            <!-- Comment div -->
-                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                
-                                <h3 class="commentLink">
-
-                                    <a href="{%url 'comment' post.id%}">
-                                        Comment
-                                    </a>
-                            
-                                </h3>
-
-                            </div>
-
-                            <!-- Empty div -->
-                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                
-                            </div>
-
-                            <!-- Download Div -->
-                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                
-                            </div>
-
-                        </div>
-
-
-                    </div>
+                    {% endif %}
 
                 </div>
 
             </div>
-            
+
         </div>
 
     </div>
+
+</div>
 
 {% endblock %}
