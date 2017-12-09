@@ -15,7 +15,7 @@
 
     {% block styles %}
         {% bootstrap_css %}
-        <link rel="stylesheet" href="{% static 'css/base.css'%}">
+        <link rel="stylesheet" href="{% static 'css/index.css'%}">
     {% endblock %}
     
 </head>
@@ -24,12 +24,10 @@
     <!-- Navbar -->
     {% include 'inherited-temp/navbar.html' %}
 
-    <!-- Content from child templates -->
-
     {% block content %}
     {% endblock %}
     
-    <!-- Javascript -->
+
     
     {% block scripts %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
