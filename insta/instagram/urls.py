@@ -6,8 +6,9 @@ from . import views
 
 urlpatterns = [
     url( r'^$', views.index, name="timeline"),
-    url( r'^post', views.new_post, name="new-post"),
+    url( r'^post', views.post, name="post"),
     url( r'^profile/(\d+)', views.profile, name="profile"),
+    url( r'^look_up/(\d+)', views.look_up, name="look-up"),
 ]
 
 if settings.DEBUG:
