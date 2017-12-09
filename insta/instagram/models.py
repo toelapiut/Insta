@@ -51,3 +51,25 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class Tag(models.Model):
+   
+    name = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def save_tag(self):
+       
+        self.save()
+
+    def delete_tag(self):
+     
+        self.delete()
+
+    @classmethod
+    def get_tags(cls):
+
+        gotten_tags = Tag.objects.all()
+
+        return gotten_tags
