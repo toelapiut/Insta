@@ -73,3 +73,48 @@ class Tag(models.Model):
         gotten_tags = Tag.objects.all()
 
         return gotten_tags
+
+class Post(models.Model):
+    '''
+    Class that defines a Post made by a User on their Profile
+    '''
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    post_date = models.DateTimeField(auto_now_add=True)
+
+    image = models.ImageField(upload_to="posts/")
+
+    caption = models.TextField(blank=True)
+
+    tags = models.ManyToManyField(Tag, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        '''
+        Order posts with most recent at the top
+        '''
+        ordering = ['-post_date']
+
+    # def save_post(self):
+    #     '''
+    #     Method to save a post to the database
+    #     '''
+    #     self.save()
+
+    @classmethod
+    def get_posts(cls):
+
+        posts = Post.objects.all()
+
+        return posts
+
+    @classmethod
+    def get_profile_posts(cls,profile_id):
+
+        profile_posts = Post.objects.filter(profile=profile_id).all()
+
+        return profile_posts
