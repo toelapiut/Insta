@@ -16,29 +16,27 @@
 
         <!-- Profile Div -->
 
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-5 col-lg-5 col-md-offset-3 col-lg-offset-3">
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" style='width:100%'>
 
                 <div class="panel-heading">
 
-                    <img src="{{follow.profile.profile_pic.url}}" alt="{{follow.profile.user.username}}" class="img-responsive profilePicture">
+                    <img src="{{follow.profile.url}}" alt="{{follow.profile.user.username}}" class="img-responsive profilePicture">
 
                     <h6 class="username">
                         {{follow.profile.user.username}}
                     </h6>
 
-                    <h6 class="timeSince">
-                        {{follow.post_date | timesince}} ago
-                    </h6>
+
 
                 </div>
 
-                <div class="panel-body">
+                <div class="panel-body" style="padding:0px">
 
-                    <a href="{%url 'post' follow.id%}">
+                    <a href="{%url 'post_look' follow.id%}">
 
-                        <img src="{{follow.image.url}}" alt="{{follow.caption}}" class="img-responsive postImage">
+                        <img src="{{follow.image.url}}" alt="{{follow.caption}}" class="img-responsive postImage" style='width:100%;'>
 
                         <h5 class="text-center">
                             {{follow.caption}}
