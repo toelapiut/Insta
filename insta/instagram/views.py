@@ -75,7 +75,7 @@ def post(request):
 
     else:
 
-        form = NewsPostForm()
+        form = PostForm()
 
     title = 'Create Post'
 
@@ -152,7 +152,7 @@ def comment(request,id):
 
         form = NewCommentForm()
 
-    title = f'Comment {current_post.user.username}
+    title = f'Comment {current_post.user.username}'
 
     return render(request,'all-temps/comment.html', {"title":title,"form":form,"current_post":current_post})
 
