@@ -1,0 +1,127 @@
+{% extends 'inherited-temp/base.html' %}
+{% load staticfiles%}
+{% load bootstrap3%}
+
+<!-- Styles block -->
+{% block styles %}
+
+    {{block.super}}
+    <link rel="stylesheet" href="{% static 'css/post.css'%}">
+
+{% endblock %}
+
+<!-- Content block -->
+{% block content %}
+
+    {{block.super}}
+
+    <div class="container">
+
+        <div class="row postRow">
+           <!-- Post Div -->
+
+            <div class="col-md-10 col-lg-10">
+
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+
+                        <img src="{{post.profile.profile_pic.url}}" alt="{{post.profile.user.username}}" class="img-responsive profilePicture">
+
+                        <h6 class="username">
+                            {{post.profile.user.username}}
+                        </h6>
+
+                        <h6 class="timeSince">
+                            {{post.post_date | timesince}} ago
+                        </h6>
+
+                    </div>
+
+                    <div class="panel-body">
+        
+                        <img src="{{post.image.url}}" alt="{{post.caption}}" class="img-responsive postImage">
+
+                        <h5 class="text-center">
+                            {{post.caption}}
+                        </h5>
+                        
+                        {{likes}}
+
+
+                        {% if like %}
+
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+
+                        {% else %}
+
+                            <a href="{%url 'liker' post.id%}">
+                                    
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+
+                            </a>
+
+                        {% endif %}
+
+                        {% for comment in comments %}
+
+                           <h5>
+
+                                <img src="{{comment.user.profile.profile_pic.url}}" alt="{{comment.user.username}}" class="img-responsive commentProfilePicture">
+
+                                <span class="commenterName">
+
+                                    {{comment.user.username}}
+                                    
+                                </span>
+
+                                <span class="commentContent">
+
+                                    {{comment.comment_content}}
+
+                                </span>
+
+                            </h5>
+
+                        {% empty %}
+
+                            <h6>
+                                No Comments
+                            </h6>
+
+                        {% endfor %}
+
+                        <div class="row">
+
+                            <!-- Comment div -->
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                
+                                <h3 class="commentLink">
+
+                                    <a href="{%url 'comment' post.id%}">
+                                        Comment
+                                    </a>
+                            
+                                </h3>
+
+                            </div>
+
+                            <!-- Empty div -->
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+{% endblock %}
