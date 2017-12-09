@@ -110,3 +110,16 @@ def look_up(request,id):
     title = f'{current_user.username}'
 
     return render(request,'all-temps/look_up.html',{"title":title,"profiles":profiles_list})
+
+@login_required(login_url='/accounts/register')
+def follow(request,id):
+
+    current_user = request.user
+
+    follow_profile = Profile.objects.get(id=id)
+
+    following = Follow(user=current_user, profile=follow_profile)
+
+    following.save()
+
+    return redirect(timeline)
