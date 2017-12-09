@@ -123,3 +123,35 @@ def follow(request,id):
     following.save()
 
     return redirect(timeline)
+
+
+@login_required(login_url='/accounts/register')
+def comment(request,id):
+
+    current_user = request.user
+
+    current_post = Post.objects.get(id=id)
+
+    if request.method == 'POST':
+
+        form = NewCommentForm(request.POST)
+
+        if form.is_valid:
+
+            comment = form.save(commit=False)
+
+            comment.user = current_user
+
+            comment.post = current_post
+
+            comment.save()
+
+            return redirect(post,current_post.id)
+
+    else:
+
+        form = NewCommentForm()
+
+    title = f'Comment {current_post.user.username}
+
+    return render(request,'all-temps/comment.html', {"title":title,"form":form,"current_post":current_post})
