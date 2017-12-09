@@ -155,3 +155,39 @@ def comment(request,id):
     title = f'Comment {current_post.user.username}
 
     return render(request,'all-temps/comment.html', {"title":title,"form":form,"current_post":current_post})
+
+@login_required(login_url='/accounts/register')
+def like(request,id):
+
+    current_user = request.user
+
+    current_post = Post.objects.get(id=id)
+
+    like = Like(user=current_user,post=current_post,likes_number=1)
+
+    like.save()
+
+    return redirect(post,current_post.id)
+
+@login_required(login_url='/accounts/register')
+def post_look(request,id):
+    '''
+    View function to display a single post, its comments and likes
+    '''
+    current_user = request.user
+    try:
+        current_post = Post.objects.get(id=id)
+
+        title = f'{current_post.user.username}\'s post'
+
+        comments = Comment.get_post_comments(id)
+
+        likes = Like.num_likes(id)
+
+        like = Like.objects.filter(post=id).filter(user=current_user)
+
+    except DoesNotExist:
+        raise Http404()
+
+    return render(request, 'all-temps/post_look.html', {"title":title, "post":current_post,"comments":comments,"likes":likes,"like":like })
+
