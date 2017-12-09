@@ -41,6 +41,11 @@ class Profile(models.Model):
 
         return other_profiles
 
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+
 # Create Profile when creating a User
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -126,6 +131,11 @@ class Post(models.Model):
         profile_posts = Post.objects.filter(profile=profile_id).all()
 
         return profile_posts
+
+    @property
+    def photo_url(self):
+        if self.photo and hasattr(self.photo, 'url'):
+            return self.photo.url
 
 class Like(models.Model):
 
