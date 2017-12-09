@@ -1,0 +1,51 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+
+    <!-- Styles block -->
+    {% block styles %}
+
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="{% static 'css/index.css'%}">
+        <script src="https://use.fontawesome.com/80caa23151.js"></script>
+
+    {% endblock %}
+</head>
+<body>
+   
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+
+            <div class="container-fluid">
+
+                <div class="container"> 
+
+                    <div class="navbar-header">
+
+                        <a href="{% url 'timeline'%}" class="navbar-brand siteIcon">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </a>
+
+                        <a href="{% url 'timeline'%}" class="navbar-brand siteName">......</a>
+
+                    </div>
+
+                    <div class="navbar-right">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+    
+        </nav>
+
+    
+</body>
+</html>
