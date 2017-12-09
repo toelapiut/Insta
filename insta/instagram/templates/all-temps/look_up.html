@@ -1,0 +1,58 @@
+{% extends 'all-posts/base.html' %}
+{% load staticfiles%}
+
+<!-- Styles block -->
+{% block styles %}
+
+    {{block.super}}
+    <link rel="stylesheet" href="{% static 'css/index.css'%}">
+
+{% endblock %}
+
+<!-- Content block -->
+{% block content %}
+
+    {{block.super}}
+
+    <div class="container">
+
+        <div class="row profileRow">
+            
+            {%for profile in profiles%}
+
+                <!-- Profile Div -->
+
+                <div class="col-md-10 col-lg-10">
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+
+                            <img src="{{profile.profile_pic.url}}" alt="{{profile.user.username}}" class="img-responsive profilePicture">
+
+                            <h6 class="username">
+                                {{profile.user.username}}
+
+                                <a href="{% url 'follow' profile.id%}" class="follow">
+                                    Follow
+                                </a>
+
+                            </h6>
+
+                        </div>
+
+                        <div class="panel-body">
+                            {{profile.user.username}}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+            
+        </div>
+        
+    </div>
+
+{% endblock %}
