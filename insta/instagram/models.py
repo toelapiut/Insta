@@ -126,3 +126,22 @@ class Post(models.Model):
         profile_posts = Post.objects.filter(profile=profile_id).all()
 
         return profile_posts
+
+
+class Comment(models.Model):
+
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+
+    comment_content = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+    @classmethod
+    def get_post_comments(cls,post_id):
+
+        post_comments = Comment.objects.filter(post=post_id)
+
+        return post_comments
