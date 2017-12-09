@@ -52,6 +52,24 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+
+
+class Follow(models.Model):
+
+    user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+
+    profile = models.ForeignKey(Profile,on_delete=models.DO_NOTHING,)
+
+    def __str__(self):
+        return self.user.username
+
+    @classmethod
+    def get_following(cls,user_id):
+
+        following =  Follow.objects.filter(user=user_id).all()
+
+        return following
+
 class Tag(models.Model):
    
     name = models.CharField(max_length=30, unique=True)
@@ -75,9 +93,7 @@ class Tag(models.Model):
         return gotten_tags
 
 class Post(models.Model):
-    '''
-    Class that defines a Post made by a User on their Profile
-    '''
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -94,16 +110,8 @@ class Post(models.Model):
         return self.user.username
 
     class Meta:
-        '''
-        Order posts with most recent at the top
-        '''
-        ordering = ['-post_date']
 
-    # def save_post(self):
-    #     '''
-    #     Method to save a post to the database
-    #     '''
-    #     self.save()
+        ordering = ['-post_date']
 
     @classmethod
     def get_posts(cls):
