@@ -1,9 +1,79 @@
 .fa-instagram:before {
-    content: "\f16d";
     color: black;
 }
 
-.container{
+.container {
     margin-top: 14%;
     text-align: center;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+    padding: 0px;
+}
+
+#button_submit {
+    display: block;
+    height: 26px;
+    padding: 0 19px;
+    font-size: 13px;
+    line-height: 25px;
+    cursor: pointer;
+    border: 1px solid #000000;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    transition: all .2s ease-in-out;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    color: rgb(3, 3, 3);
+    transition: color .2s ease-in-out, opacity .2s ease-in-out;
+    margin-bottom: 23px;
+    
+}
+
+username{
+    float: left;
+   
+}
+h3.username{
+    margin-top: -8%;
+    margin-left: -63%;
+}
+.icon {
+    vertical-align: middle;
+    height: 5vh;
+    padding: 5px 10px 0%;
+    margin-top: 2.3%;
+}
+
+.img-responsive.prof {
+    height: 340px;
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 4px
+}
+
+.img-responsive.profile {
+    height: 19em;
+    width: 67%;
+    margin-top: -12%;
+    margin-bottom: 12%;
+    border-radius: 4px;
+}
+.col-lg-offset-3 {
+    margin-left: 27%;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+img.img-responsive.postImage{
+    width:100%;
 }
