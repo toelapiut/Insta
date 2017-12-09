@@ -1,50 +1,53 @@
-{% extends 'inherited-temp/base.html' %}
-{% load bootstrap3 %}
+{% extends 'inherited-temp/base.html' %} {% load bootstrap3 %} {% load staticfiles %}{% block content %}
+<div class="reg-cont" style="height:100vh">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-7 col-sm-6 col-xs-6 col-lg-8">
+                <img src="{%static 'img/logo.png' %}" alt="Instagram Logo" class="img-responsive" style='height: 14vh;margin-left: 30%; margin-bottom:5%'>
+                <img src="{% static 'img/bg.png' %}" alt="">
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-6 col-lg-4 reg-container">
+                {% if form.errors %}
 
+                <p>Some Information Might Be Incorrect</p>
 
-{% block content %}
+                {% endif %}
 
-    {% if form.errors %}
+                <div class="panel panel-default">
 
-        <p>Some Information Might Be Incorrect</p>
+                    <div class="panel-heading">
 
-    {% endif %}
+                        <h4 class="text-center signup">
+                            SIGN UP
+                        </h4>
 
-    <div class="panel panel-default">
-        
-        <div class="panel-heading">
+                    </div>
 
-            <h3 class="text-center">
-                Sign Up
-            </h3>
+                    <div class="panel-body">
 
-        </div>
+                        <form action="/accounts/register/" method="post">
 
-        <div class="panel-body">
+                            {% csrf_token %} {% bootstrap_form form %}
 
-            <form action="/accounts/register/" method="post">
+                            <div class="form-group">
 
-                {% csrf_token %}
+                                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
 
-                {% bootstrap_form form %}
+                            </div>
 
-                <div class="form-group">
-                    
-                    <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+                            <input type="hidden" name="next" value="/accounts/login/">
 
+                        </form>
+
+                        <h5>
+                            Have an account?
+                            <a href="/accounts/login/">Log in</a>
+                        </h5>
+
+                    </div>
                 </div>
-
-                <input type="hidden" name="next" value="/accounts/login/">
-
-            </form>
-
-            <h4>
-                Have an account? <a href="/accounts/login/">Log in</a>
-            </h4>
-            
+            </div>
         </div>
-
     </div>
-                
+</div>
 {% endblock %}
-
