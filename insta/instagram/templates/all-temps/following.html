@@ -1,0 +1,25 @@
+{% extends 'all-posts/base.html' %}
+{% load staticfiles%}
+
+<!-- Styles block -->
+{% block styles %}
+
+    {{block.super}}
+    <link rel="stylesheet" href="{% static 'css/following-profile.css'%}">
+
+{% endblock %}
+
+<!-- Content block -->
+{% block content %}
+
+    {{block.super}}
+
+    <div class="container">
+        
+        <h2>
+            {{message}}
+        </h2>
+        
+    </div>
+
+{% endblock %}
