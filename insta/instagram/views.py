@@ -51,7 +51,7 @@ def profile(request,id):
         raise Http404()
 
 @login_required(login_url='/accounts/register')
-defpost(request):
+def post(request):
   
     current_user = request.user
 
