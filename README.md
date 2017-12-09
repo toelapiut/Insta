@@ -1,3 +1,4 @@
+## Instagram :collision:
 
 ## APP SHOTS :camera:
 ![screenshot from 2017-12-10 00-45-25](https://user-images.githubusercontent.com/28382424/33799799-f1a3e674-dd43-11e7-89ad-7c935f22a63f.png)
@@ -6,8 +7,8 @@
 * post images with captions
 * view list of other users
 * follow other users and see their posts on their timeline
-* like a post
-* comment on a post
+* like a post :+1:
+* comment on a post :speech_balloon:
 * download an image
 
 ## User Stories
