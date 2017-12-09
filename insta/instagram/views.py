@@ -5,5 +5,5 @@ from django.shortcuts import render,redirect
 
 def index(request):
 
-    title='Hello world'
+    title='instagram'
     return render(request, 'index.html', {"title": title})
