@@ -80,3 +80,33 @@ def post(request):
     title = 'Create Post'
 
     return render(request,'all-temps/post.html', {"form":form})
+
+
+@login_required(login_url='/accounts/register')
+def look_up(request,id):
+
+    current_user = request.user
+
+    current_user_profile = current_user.profile
+
+    profiles = Profile.get_other_profiles(current_user.id)
+
+    following = Follow.objects.filter(user=current_user)
+
+    following_profile_list = []
+
+    for follow in following:
+
+        following_profile_list.append(follow.profile)
+
+    profiles_list = []
+
+    for profile in profiles:
+
+        if profile not in following_profile_list:
+
+            profiles_list.append(profile)
+
+    title = f'{current_user.username}'
+
+    return render(request,'all-temps/look_up.html',{"title":title,"profiles":profiles_list})
