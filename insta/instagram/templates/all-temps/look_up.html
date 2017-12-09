@@ -1,4 +1,4 @@
-{% extends 'all-posts/base.html' %}
+{% extends 'inherited-temp/base.html' %}
 {% load staticfiles%}
 
 <!-- Styles block -->
@@ -28,7 +28,7 @@
 
                         <div class="panel-heading">
 
-                            <img src="{{profile.profile_pic.url}}" alt="{{profile.user.username}}" class="img-responsive profilePicture">
+                            <img src="{{profile.url}}" alt="{{profile.user.username}}" class="img-responsive profilePicture">
 
                             <h6 class="username">
                                 {{profile.user.username}}
