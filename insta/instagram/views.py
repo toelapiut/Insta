@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Tag, Post, Follow, Comment, Like
@@ -32,23 +33,6 @@ def index(request):
 
     return render(request, 'index.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts})
 
-@login_required(login_url='/accounts/register')
-def profile(request,id):
-
-    current_user = request.user
-
-    try:
-
-        profile = Profile.objects.get(user=current_user.id)
-
-        title = f'{current_user.username}\'s'
-
-        posts = Post.objects.filter(user=current_user.id)
-
-        return render(request, 'all-temps/profile.html', {"title":title,"current_user":current_user,"posts":posts})
-
-    except DoesNotExists:
-        raise Http404()
 
 @login_required(login_url='/accounts/register')
 def post(request):
@@ -59,7 +43,7 @@ def post(request):
 
     if request.method == 'POST':
 
-        form = NewsPostForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES)
 
         if form.is_valid:
 
@@ -80,6 +64,27 @@ def post(request):
     title = 'Create Post'
 
     return render(request,'all-temps/post.html', {"form":form})
+
+
+@login_required(login_url='/accounts/register')
+def profile(request,id):
+    '''
+    View function to display the profile of the logged in user when they click on the user icon
+    '''
+    current_user = request.user
+
+    try:
+
+        single_profile = Profile.objects.get(user=current_user.id)
+
+        title = f'{current_user.username}\'s'
+
+        posts = Post.objects.filter(user=current_user.id)
+
+        return render(request, 'all-temps/profile.html', {"title":title,"current_user":current_user,"posts":posts})
+
+    except ObjectDoesNotExist:
+        raise Http404()
 
 
 @login_required(login_url='/accounts/register')
@@ -122,7 +127,7 @@ def follow(request,id):
 
     following.save()
 
-    return redirect(timeline)
+    return redirect(index)
 
 
 @login_required(login_url='/accounts/register')
@@ -134,7 +139,7 @@ def comment(request,id):
 
     if request.method == 'POST':
 
-        form = NewCommentForm(request.POST)
+        form = CommentForm(request.POST)
 
         if form.is_valid:
 
@@ -146,11 +151,11 @@ def comment(request,id):
 
             comment.save()
 
-            return redirect(post,current_post.id)
+            return redirect(post_look,current_post.id)
 
     else:
 
-        form = NewCommentForm()
+        form = CommentForm()
 
     title = f'Comment {current_post.user.username}'
 
@@ -167,9 +172,10 @@ def like(request,id):
 
     like.save()
 
-    return redirect(post,current_post.id)
+    return redirect(post_look,current_post.id)
 
 @login_required(login_url='/accounts/register')
+
 def post_look(request,id):
     '''
     View function to display a single post, its comments and likes
@@ -178,15 +184,14 @@ def post_look(request,id):
     try:
         current_post = Post.objects.get(id=id)
 
-        title = f'{current_post.user.username}\'s post'
-
+        title = f'{current_post.user.username}'
         comments = Comment.get_post_comments(id)
 
         likes = Like.num_likes(id)
 
         like = Like.objects.filter(post=id).filter(user=current_user)
 
-    except DoesNotExist:
+    except ObjectDoesNotExist:
         raise Http404()
 
     return render(request, 'all-temps/post_look.html', {"title":title, "post":current_post,"comments":comments,"likes":likes,"like":like })
