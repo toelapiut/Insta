@@ -1,6 +1,6 @@
-# Insta
 
-## By **[Apiut Toel](https://github.com/toelapiut)**
+##APP SHOTS
+![screenshot from 2017-12-10 00-45-25](https://user-images.githubusercontent.com/28382424/33799799-f1a3e674-dd43-11e7-89ad-7c935f22a63f.png)
 
 ## Description
 * post images with captions
@@ -49,7 +49,7 @@ As a user I would like:
 
 ### License
 
-MIT (c) 2017 **[Toel Apiut](https://github.com/toelapiut)**
+MIT (c) 2017 **[Toel Apiut :smiley:](https://github.com/toelapiut)**
 
 
 
