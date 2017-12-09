@@ -1,1 +1,18 @@
+{% extends 'inherited-temp/base.html' %}
+{% load staticfiles%}
+{% load bootstrap3%}
+
+<!-- Styles block -->
+{% block styles %}
+
+    {{block.super}}
+    <link rel="stylesheet" href="{% static 'css/index.css'%}">
+
+{% endblock %}
+<!-- Content block -->
+{% block content %}
+
+    {{block.super}}
+
 <h1>Hello world</h1>
+{% endblock %}
