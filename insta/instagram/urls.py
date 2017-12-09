@@ -6,6 +6,8 @@ from . import views
 
 urlpatterns = [
     url( r'^$', views.index, name="timeline"),
+    
+    url( r'^profile/(\d+)', views.profile, name="profile"),
 ]
 
 if settings.DEBUG:
